@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacBook에서 코딩을 잘하는 10가지 방법</title>
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b22;
+      --bg3: #1c2128;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --text3: #6e7681;
+      --accent: #58a6ff;
+      --accent2: #79c0ff;
+      --green: #3fb950;
+      --orange: #d29922;
+      --red: #f85149;
+      --purple: #bc8cff;
+      --tip-bg: #1a2332;
+      --tip-border: #1f6feb;
+      --code-bg: #161b22;
+      --code-inline: #1f2937;
+      --sidebar-w: 280px;
+      --content-max: 860px;
+      --radius: 8px;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    /* ── Layout ── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg2);
+      z-index: 1;
+    }
+
+    .sidebar-logo {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-logo svg { flex-shrink: 0; }
+
+    .sidebar-subtitle {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    .sidebar-nav { padding: 12px 0 24px; }
+
+    .nav-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 20px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 20px;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 13px;
+      border-left: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+      background: rgba(88, 166, 255, 0.06);
+      border-left-color: var(--accent);
+    }
+
+    .nav-item.active {
+      color: var(--accent);
+      background: rgba(88, 166, 255, 0.1);
+      border-left-color: var(--accent);
+      font-weight: 500;
+    }
+
+    .nav-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      min-width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .nav-item.active .nav-num {
+      background: rgba(88, 166, 255, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Main Content ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1f2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: var(--content-max); position: relative; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .hero-tag .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* ── Content Area ── */
+    .content {
+      max-width: var(--content-max);
+      padding: 48px 48px 80px;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 72px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(88,166,255,0.05));
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .section-title-wrap h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title-wrap .section-desc {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    /* ── Subsection ── */
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 32px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Paragraphs ── */
+    p {
+      color: var(--text2);
+      margin-bottom: 14px;
+      line-height: 1.8;
+    }
+
+    p strong, li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Code ── */
+    code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--code-inline);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: var(--accent2);
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 16px 0;
+      position: relative;
+    }
+
+    pre::before {
+      content: attr(data-lang);
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--font-mono);
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Syntax highlighting */
+    .kw { color: #ff7b72; }   /* keywords */
+    .cm { color: #8b949e; font-style: italic; } /* comments */
+    .st { color: #a5d6ff; }   /* strings */
+    .fn { color: #d2a8ff; }   /* functions */
+    .nm { color: #79c0ff; }   /* names/vars */
+    .op { color: #ff7b72; }   /* operators */
+    .nu { color: #f2cc60; }   /* numbers */
+    .ky { color: #7ee787; }   /* keys (json/yaml) */
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    thead tr {
+      background: var(--bg3);
+    }
+
+    th {
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 16px;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(48,54,61,0.5);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: rgba(88,166,255,0.03); }
+
+    td code { font-size: 12px; }
+
+    td:first-child { color: var(--text); font-weight: 500; }
+
+    /* ── Tip Callout ── */
+    .tip {
+      background: var(--tip-bg);
+      border: 1px solid var(--tip-border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 13.5px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .tip-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    /* ── Lists ── */
+    ul, ol {
+      padding-left: 20px;
+      margin: 10px 0 14px;
+    }
+
+    li {
+      color: var(--text2);
+      margin-bottom: 5px;
+      line-height: 1.7;
+    }
+
+    li::marker { color: var(--accent); }
+
+    /* ── Bold labels ── */
+    .label {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* ── Kbd ── */
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      border-radius: 5px;
+      padding: 1px 7px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* ── Comparison table special ── */
+    .star { color: #f2cc60; }
+
+    /* ── Workflow steps ── */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: rgba(88,166,255,0.12);
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── TOC section ── */
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .toc-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text2);
+      font-size: 13px;
+      transition: all 0.15s;
+    }
+
+    .toc-card:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(88,166,255,0.05);
+      transform: translateY(-1px);
+    }
+
+    .toc-card-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+      background: rgba(88,166,255,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      flex-shrink: 0;
+    }
+
+    /* ── Mobile toggle ── */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 200;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main {
+        margin-left: 0;
+      }
+      .hero, .content {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .hero { padding-top: 72px; }
+      .menu-toggle { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 22px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .content { padding: 32px 20px 60px; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .sidebar, .menu-toggle { display: none; }
+      .main { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile toggle -->
+<button class="menu-toggle" onclick="toggleSidebar()" aria-label="메뉴 열기">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div class="layout">
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+        MacBook 코딩 가이드
+      </div>
+      <div class="sidebar-subtitle">마지막 업데이트: 2026년 3월</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section-label">목차</div>
+      <a href="#intro" class="nav-item active">
+        <span class="nav-num">00</span>소개
+      </a>
+      <a href="#s1" class="nav-item">
+        <span class="nav-num">01</span>Mac 개발 환경 기초 세팅
+      </a>
+      <a href="#s2" class="nav-item">
+        <span class="nav-num">02</span>VS Code Mac 최적화
+      </a>
+      <a href="#s3" class="nav-item">
+        <span class="nav-num">03</span>Open Code 완전 정복
+      </a>
+      <a href="#s4" class="nav-item">
+        <span class="nav-num">04</span>Open Spec 스펙 기반 개발
+      </a>
+      <a href="#s5" class="nav-item">
+        <span class="nav-num">05</span>AI 모델 전략적 선택법
+      </a>
+      <a href="#s6" class="nav-item">
+        <span class="nav-num">06</span>AI 프롬프트 엔지니어링
+      </a>
+      <a href="#s7" class="nav-item">
+        <span class="nav-num">07</span>Mac 키보드 & 생산성 해킹
+      </a>
+      <a href="#s8" class="nav-item">
+        <span class="nav-num">08</span>Git 워크플로우 + AI 연동
+      </a>
+      <a href="#s9" class="nav-item">
+        <span class="nav-num">09</span>디버깅 & 문제 해결에 AI 활용
+      </a>
+      <a href="#s10" class="nav-item">
+        <span class="nav-num">10</span>Mac 개발 환경 유지보수
+      </a>
+      <a href="#outro" class="nav-item">
+        <span class="nav-num">✦</span>마치며
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="hero" id="intro">
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          개인 레퍼런스 가이드
+        </div>
+        <h1>MacBook에서 코딩을 잘하는<br><span>10가지 방법</span></h1>
+        <p class="hero-desc">
+          VS Code, Open Code, Open Spec과 Gemini, Claude, ChatGPT를 조합해
+          MacBook을 AI 파워드 개발 스테이션으로 만드는 실전 가이드.
+        </p>
+        <div class="hero-meta">
+          <span class="hero-tag"><span class="dot"></span>5,000단어 상세 가이드</span>
+          <span class="hero-tag">10개 토픽</span>
+          <span class="hero-tag">Apple Silicon 기준</span>
+          <span class="hero-tag">2026년 3월</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- TOC -->
+      <div class="toc-grid">
+        <a href="#s1" class="toc-card"><span class="toc-card-num">01</span>Mac 개발 환경 기초 세팅</a>
+        <a href="#s2" class="toc-card"><span class="toc-card-num">02</span>VS Code Mac 최적화</a>
+        <a href="#s3" class="toc-card"><span class="toc-card-num">03</span>Open Code 완전 정복</a>
+        <a href="#s4" class="toc-card"><span class="toc-card-num">04</span>Open Spec 스펙 기반 개발</a>
+        <a href="#s5" class="toc-card"><span class="toc-card-num">05</span>AI 모델 전략적 선택법</a>
+        <a href="#s6" class="toc-card"><span class="toc-card-num">06</span>AI 프롬프트 엔지니어링</a>
+        <a href="#s7" class="toc-card"><span class="toc-card-num">07</span>Mac 키보드 & 생산성 해킹</a>
+        <a href="#s8" class="toc-card"><span class="toc-card-num">08</span>Git 워크플로우 + AI 연동</a>
+        <a href="#s9" class="toc-card"><span class="toc-card-num">09</span>디버깅 & 문제 해결에 AI 활용</a>
+        <a href="#s10" class="toc-card"><span class="toc-card-num">10</span>Mac 개발 환경 유지보수</a>
+      </div>
+
+      <hr>
+
+      <!-- ── Section 1 ── -->
+      <section class="section" id="s1">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <div class="section-title-wrap">
+            <h2>Mac 개발 환경 기초 세팅</h2>
+            <div class="section-desc">Homebrew · Zsh · Oh My Zsh · 터미널 앱</div>
+          </div>
+        </div>
+
+        <p>MacBook에서 개발 환경을 제대로 세팅하면 이후 모든 작업이 훨씬 편해진다. Homebrew를 중심으로 필수 CLI 도구들을 설치하고, Zsh 환경을 최적화하는 것이 첫 번째 단계다.</p>
+
+        <h3>1.1 Homebrew 설치 및 필수 CLI 도구</h3>
+        <p>Homebrew는 macOS의 사실상 표준 패키지 매니저다. Apple Silicon(M시리즈) Mac에서는 <code>/opt/homebrew</code>에 설치된다.</p>
+
+        <pre data-lang="bash"><code><span class="cm"># Homebrew 설치</span>
+<span class="nm">/bin/bash</span> -c <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
+
+<span class="cm"># Apple Silicon: PATH 설정 (.zshrc에 추가)</span>
+<span class="kw">echo</span> <span class="st">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> >> ~/.zshrc
+<span class="kw">source</span> ~/.zshrc</code></pre>
+
+        <p>설치 후 필수 CLI 도구들을 한 번에 설치한다:</p>
+
+        <pre data-lang="bash"><code>brew install git node bun python fzf ripgrep jq bat eza fd</code></pre>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>도구</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>git</code></td><td>버전 관리</td></tr>
+              <tr><td><code>node</code></td><td>Node.js 런타임</td></tr>
+              <tr><td><code>bun</code></td><td>빠른 JS 런타임/패키지 매니저</td></tr>
+              <tr><td><code>python</code></td><td>Python 3</td></tr>
+              <tr><td><code>fzf</code></td><td>퍼지 파인더 (히스토리 검색 등)</td></tr>
+              <tr><td><code>ripgrep</code></td><td>빠른 코드 검색 (<code>rg</code> 명령어)</td></tr>
+              <tr><td><code>jq</code></td><td>JSON 처리 CLI</td></tr>
+              <tr><td><code>bat</code></td><td><code>cat</code> 대체 (신택스 하이라이팅)</td></tr>
+              <tr><td><code>eza</code></td><td><code>ls</code> 대체 (컬러, 아이콘)</td></tr>
+              <tr><td><code>fd</code></td><td><code>find</code> 대체 (빠르고 직관적)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>1.2 Zsh 환경 설정</h3>
+        <p>macOS 기본 셸은 Zsh다. Oh My Zsh를 설치하면 플러그인과 테마 관리가 쉬워진다.</p>
+
+        <pre data-lang="bash"><code><span class="cm"># Oh My Zsh 설치</span>
+sh -c <span class="st">"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span></code></pre>
+
+        <p><code>~/.zshrc</code>에 유용한 alias를 추가한다:</p>
+
+        <pre data-lang="bash"><code><span class="cm"># 자주 쓰는 alias</span>
+<span class="kw">alias</span> <span class="nm">ll</span>=<span class="st">"eza -la --icons"</span>
+<span class="kw">alias</span> <span class="nm">cat</span>=<span class="st">"bat"</span>
+<span class="kw">alias</span> <span class="nm">grep</span>=<span class="st">"rg"</span>
+<span class="kw">alias</span> <span class="nm">..</span>=<span class="st">"cd .."</span>
+<span class="kw">alias</span> <span class="nm">...</span>=<span class="st">"cd ../.."</span>
+
+<span class="cm"># Git 단축어</span>
+<span class="kw">alias</span> <span class="nm">gs</span>=<span class="st">"git status"</span>
+<span class="kw">alias</span> <span class="nm">ga</span>=<span class="st">"git add"</span>
+<span class="kw">alias</span> <span class="nm">gc</span>=<span class="st">"git commit"</span>
+<span class="kw">alias</span> <span class="nm">gp</span>=<span class="st">"git push"</span></code></pre>
+
+        <p>fzf 히스토리 검색 활성화 (<kbd>⌃R</kbd>로 이전 명령어 퍼지 검색):</p>
+
+        <pre data-lang="bash"><code><span class="kw">source</span> <span class="st">"$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"</span>
+<span class="kw">source</span> <span class="st">"$(brew --prefix)/opt/fzf/shell/completion.zsh"</span></code></pre>
+
+        <p><strong>추천 Oh My Zsh 플러그인:</strong></p>
+
+        <pre data-lang="bash"><code><span class="nm">plugins</span>=(
+  git                      <span class="cm"># git 단축어 (gst, gco, gp 등)</span>
+  zsh-autosuggestions      <span class="cm"># 이전 명령어 자동 제안 (→ 키로 수락)</span>
+  zsh-syntax-highlighting  <span class="cm"># 명령어 신택스 하이라이팅</span>
+  z                        <span class="cm"># 자주 가는 디렉토리 빠른 이동</span>
+)</code></pre>
+
+        <h3>1.3 터미널 앱 선택</h3>
+        <p>기본 Terminal.app보다 훨씬 강력한 대안이 있다:</p>
+        <ul>
+          <li><strong>iTerm2</strong> — 분할 창, 프로필 관리, 트리거 기능. 무료, 안정적. <code>brew install --cask iterm2</code></li>
+          <li><strong>Warp</strong> — AI 명령어 제안, 블록 단위 출력 관리, 현대적인 UI. <code>brew install --cask warp</code></li>
+        </ul>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          <code>brew install --cask</code> 명령어로 GUI 앱도 Homebrew로 관리할 수 있다. <code>brew list --cask</code>로 설치된 앱 목록을 확인하고, <code>brew upgrade --cask</code>로 한 번에 업데이트하자.
+        </div>
+      </section>
+
+      <!-- ── Section 2 ── -->
+      <section class="section" id="s2">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <div class="section-title-wrap">
+            <h2>VS Code Mac 최적화</h2>
+            <div class="section-desc">settings.json · 확장 프로그램 · 단축키</div>
+          </div>
+        </div>
+
+        <p>VS Code는 Mac에서도 강력하지만, 기본 설정 그대로 쓰면 절반의 성능만 쓰는 것이다. settings.json 튜닝과 필수 확장 설치로 생산성을 크게 높일 수 있다.</p>
+
+        <h3>2.1 핵심 settings.json 설정</h3>
+        <p><kbd>⌘⇧P</kbd> → "Open User Settings (JSON)"으로 settings.json을 열고 아래 설정을 추가한다:</p>
+
+        <pre data-lang="json"><code>{
+  <span class="ky">"editor.fontSize"</span>: <span class="nu">14</span>,
+  <span class="ky">"editor.fontFamily"</span>: <span class="st">"'JetBrains Mono', 'Fira Code', Menlo, monospace"</span>,
+  <span class="ky">"editor.fontLigatures"</span>: <span class="kw">true</span>,
+  <span class="ky">"editor.tabSize"</span>: <span class="nu">2</span>,
+  <span class="ky">"editor.formatOnSave"</span>: <span class="kw">true</span>,
+  <span class="ky">"editor.minimap.enabled"</span>: <span class="kw">false</span>,
+  <span class="ky">"editor.wordWrap"</span>: <span class="st">"on"</span>,
+  <span class="ky">"files.autoSave"</span>: <span class="st">"onFocusChange"</span>,
+  <span class="ky">"terminal.integrated.defaultProfile.osx"</span>: <span class="st">"zsh"</span>,
+  <span class="ky">"workbench.colorTheme"</span>: <span class="st">"One Dark Pro"</span>
+}</code></pre>
+
+        <h3>2.2 필수 확장 프로그램</h3>
+        <p><kbd>⌘⇧X</kbd>로 확장 마켓플레이스를 열거나 CLI로 설치:</p>
+
+        <pre data-lang="bash"><code>code --install-extension eamodio.gitlens
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension esbenp.prettier-vscode
+code --install-extension GitHub.copilot
+code --install-extension usernamehw.errorlens
+code --install-extension ms-vscode.vscode-typescript-next
+code --install-extension PKief.material-icon-theme
+code --install-extension rangav.vscode-thunder-client
+code --install-extension christian-kohler.path-intellisense
+code --install-extension formulahendry.auto-rename-tag</code></pre>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>확장</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>GitLens</td><td>Git blame, 히스토리 인라인 표시</td></tr>
+              <tr><td>ESLint</td><td>JavaScript/TypeScript 린팅</td></tr>
+              <tr><td>Prettier</td><td>코드 자동 포맷</td></tr>
+              <tr><td>GitHub Copilot</td><td>AI 코드 자동완성</td></tr>
+              <tr><td>Error Lens</td><td>에러를 코드 옆에 인라인 표시</td></tr>
+              <tr><td>TypeScript Nightly</td><td>최신 TS 기능 지원</td></tr>
+              <tr><td>Material Icon Theme</td><td>파일 아이콘 테마</td></tr>
+              <tr><td>Thunder Client</td><td>REST API 테스트 (Postman 대체)</td></tr>
+              <tr><td>Path Intellisense</td><td>파일 경로 자동완성</td></tr>
+              <tr><td>Auto Rename Tag</td><td>HTML 태그 자동 쌍 변경</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.3 Mac 전용 단축키</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>단축키</th><th>기능</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>⌘P</kbd></td><td>파일 빠른 열기</td></tr>
+              <tr><td><kbd>⌘⇧P</kbd></td><td>커맨드 팔레트</td></tr>
+              <tr><td><kbd>⌘B</kbd></td><td>사이드바 토글</td></tr>
+              <tr><td><kbd>⌘J</kbd></td><td>터미널 패널 토글</td></tr>
+              <tr><td><kbd>⌘⇧F</kbd></td><td>전체 검색</td></tr>
+              <tr><td><kbd>⌘/</kbd></td><td>줄 주석 토글</td></tr>
+              <tr><td><kbd>⌘D</kbd></td><td>다음 동일 단어 선택</td></tr>
+              <tr><td><kbd>⌥↑</kbd> / <kbd>⌥↓</kbd></td><td>줄 위/아래로 이동</td></tr>
+              <tr><td><kbd>⌘⇧K</kbd></td><td>현재 줄 삭제</td></tr>
+              <tr><td><kbd>⌘⌥↓</kbd></td><td>커서 아래에 추가</td></tr>
+              <tr><td><kbd>⌘,</kbd></td><td>설정 열기</td></tr>
+              <tr><td><kbd>⌘⇧E</kbd></td><td>파일 탐색기 포커스</td></tr>
+              <tr><td><kbd>⌘⇧G</kbd></td><td>Git 패널 열기</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>워크스페이스 설정 팁:</strong> 프로젝트별 설정은 <code>.vscode/settings.json</code>에 저장한다.</p>
+
+        <pre data-lang="json"><code><span class="cm">// .vscode/settings.json (프로젝트별)</span>
+{
+  <span class="ky">"editor.defaultFormatter"</span>: <span class="st">"esbenp.prettier-vscode"</span>,
+  <span class="ky">"editor.formatOnSave"</span>: <span class="kw">true</span>,
+  <span class="ky">"typescript.preferences.importModuleSpecifier"</span>: <span class="st">"relative"</span>,
+  <span class="ky">"files.exclude"</span>: { <span class="ky">"node_modules"</span>: <span class="kw">true</span>, <span class="ky">".next"</span>: <span class="kw">true</span> }
+}</code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          <kbd>⌘K ⌘T</kbd>로 테마를 빠르게 전환할 수 있다. <code>code .</code> 명령어로 현재 디렉토리를 VS Code로 바로 열 수 있으니 PATH에 <code>code</code> 명령어가 등록되어 있는지 확인하자. <code>.vscode/</code> 디렉토리는 git에 커밋해 팀 전체가 동일한 개발 환경을 유지하자.
+        </div>
+      </section>
+
+      <!-- ── Section 3 ── -->
+      <section class="section" id="s3">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <div class="section-title-wrap">
+            <h2>Open Code 완전 정복</h2>
+            <div class="section-desc">AI 에이전트 오케스트레이션 · 슬래시 커맨드 · 워크플로우</div>
+          </div>
+        </div>
+
+        <p>Open Code는 AI 에이전트를 터미널에서 직접 활용하는 코딩 도구다. 여러 AI 모델(Claude, Gemini, ChatGPT 등)을 연결해 코드 작성, 탐색, 리팩토링을 자동화할 수 있다.</p>
+
+        <h3>3.1 Open Code란?</h3>
+        <p>단순한 코드 자동완성을 넘어 <strong>에이전트 오케스트레이션</strong>을 지원한다. 여러 전문 에이전트가 협력해 복잡한 작업을 처리한다:</p>
+        <ul>
+          <li><strong>explore</strong> — 코드베이스 탐색, 패턴 검색, 파일 구조 파악</li>
+          <li><strong>librarian</strong> — 외부 문서, 공식 docs, GitHub 예제 검색</li>
+          <li><strong>oracle</strong> — 복잡한 아키텍처 결정, 디버깅 자문</li>
+          <li><strong>build</strong> — 실제 코드 작성 및 구현</li>
+        </ul>
+
+        <h3>3.2 핵심 슬래시 커맨드</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>커맨드</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>/opsx-explore</code></td><td>탐색 모드 — 아이디어 탐구, 요구사항 명확화, 코드베이스 조사</td></tr>
+              <tr><td><code>/opsx-propose</code></td><td>변경 제안 생성 — proposal.md, design.md, tasks.md 자동 생성</td></tr>
+              <tr><td><code>/opsx-apply</code></td><td>변경 구현 — tasks.md 기반으로 실제 코드 작성</td></tr>
+              <tr><td><code>/opsx-archive</code></td><td>완료된 변경 아카이브 — 구현 완료 후 정리</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3.3 실전 워크플로우</h3>
+
+        <pre data-lang="bash"><code><span class="cm"># 1. 탐색: 문제 파악</span>
+/opsx-explore 로그인 기능에 어떤 보안 이슈가 있을 수 있을까?
+
+<span class="cm"># 2. 제안: 스펙 생성</span>
+/opsx-propose improve-login-security
+
+<span class="cm"># 3. 구현: 코드 작성</span>
+/opsx-apply improve-login-security
+
+<span class="cm"># 4. 아카이브: 완료 처리</span>
+/opsx-archive improve-login-security</code></pre>
+
+        <p>에이전트에게 작업을 위임할 때는 구체적인 컨텍스트를 제공할수록 결과가 좋다:</p>
+
+        <pre data-lang="text"><code><span class="cm"># 좋은 예: 컨텍스트 풍부</span>
+"src/auth/login.ts의 validateToken 함수가 만료된 JWT를 제대로 처리하지 못하고 있어.
+현재 에러: TokenExpiredError가 catch되지 않음. 수정해줘."
+
+<span class="cm"># 나쁜 예: 컨텍스트 부족</span>
+"로그인 버그 고쳐줘"</code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          Open Code의 에이전트들은 병렬로 실행될 수 있다. 독립적인 작업은 동시에 위임하면 시간을 크게 절약할 수 있다. 또한 <code>session_id</code>를 활용해 이전 에이전트 세션을 이어받으면 컨텍스트를 재사용해 토큰을 절약할 수 있다.
+        </div>
+      </section>
+
+      <!-- ── Section 4 ── -->
+      <section class="section" id="s4">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <div class="section-title-wrap">
+            <h2>Open Spec 스펙 기반 개발</h2>
+            <div class="section-desc">탐색 → 제안 → 구현 → 아카이브 4단계 워크플로우</div>
+          </div>
+        </div>
+
+        <p>Open Spec은 "스펙을 먼저 작성하고, 그 스펙을 기반으로 구현한다"는 spec-driven 개발 방법론을 지원하는 도구다.</p>
+
+        <h3>4.1 Open Spec이란?</h3>
+        <p>스펙 기반 개발의 핵심 장점:</p>
+        <ul>
+          <li><strong>명확한 의도</strong> — 코드 작성 전에 목표를 문서화</li>
+          <li><strong>AI 정확도 향상</strong> — 스펙이 있으면 AI가 더 정확하게 구현</li>
+          <li><strong>리뷰 용이</strong> — 코드 리뷰 전에 스펙 리뷰로 방향 검증</li>
+          <li><strong>히스토리 관리</strong> — 왜 이렇게 만들었는지 기록이 남음</li>
+        </ul>
+
+        <pre data-lang="yaml"><code><span class="cm"># openspec/config.yaml</span>
+<span class="ky">schema</span>: spec-driven</code></pre>
+
+        <h3>4.2 4단계 워크플로우</h3>
+
+        <ol class="steps">
+          <li>
+            <div>
+              <strong>탐색 (Explore)</strong> — <code>/opsx-explore [주제]</code><br>
+              <span style="color:var(--text2);font-size:13px;">구현 전에 문제를 충분히 이해하는 단계. 코드를 수정하지 않는다.</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>제안 (Propose)</strong> — <code>/opsx-propose [change-name]</code><br>
+              <span style="color:var(--text2);font-size:13px;">proposal.md, design.md, tasks.md 세 가지 아티팩트를 생성한다.</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>구현 (Apply)</strong> — <code>/opsx-apply [change-name]</code><br>
+              <span style="color:var(--text2);font-size:13px;">tasks.md의 체크박스를 하나씩 처리하며 실제 코드를 작성한다.</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>아카이브 (Archive)</strong> — <code>/opsx-archive [change-name]</code><br>
+              <span style="color:var(--text2);font-size:13px;">구현 완료 후 openspec/specs/로 이동해 히스토리로 보존한다.</span>
+            </div>
+          </li>
+        </ol>
+
+        <h3>4.3 실전 이점</h3>
+
+        <pre data-lang="text"><code>✅ 새로운 기능 추가 (범위가 명확해야 할 때)
+✅ 복잡한 리팩토링 (영향 범위 파악 필요)
+✅ 팀 협업 (다른 사람이 내 의도를 이해해야 할 때)
+✅ AI 활용 (스펙이 있으면 AI 결과물 품질이 크게 향상)
+
+❌ 간단한 버그 수정 (오버킬)
+❌ 실험적 프로토타입 (방향이 자주 바뀔 때)</code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          <code>openspec/config.yaml</code>의 <code>context</code> 필드에 프로젝트 기술 스택, 컨벤션, 도메인 지식을 미리 작성해두면 AI가 제안을 생성할 때 훨씬 프로젝트에 맞는 결과를 낸다.
+        </div>
+      </section>
+
+      <!-- ── Section 5 ── -->
+      <section class="section" id="s5">
+        <div class="section-header">
+          <div class="section-num">5</div>
+          <div class="section-title-wrap">
+            <h2>AI 모델 전략적 선택법</h2>
+            <div class="section-desc">Gemini · Claude · ChatGPT 상황별 선택 가이드</div>
+          </div>
+        </div>
+
+        <p>Gemini, Claude, ChatGPT 모두 강력하지만 각자 잘하는 영역이 다르다. 상황에 맞는 모델을 선택하면 같은 시간에 훨씬 좋은 결과를 얻을 수 있다.</p>
+
+        <h3>5.1 모델별 강점 비교</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>항목</th><th>Gemini</th><th>Claude</th><th>ChatGPT</th></tr></thead>
+            <tbody>
+              <tr><td>코드 생성</td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+              <tr><td>코드 설명</td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+              <tr><td>긴 컨텍스트</td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐</span></td></tr>
+              <tr><td>웹 검색</td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+              <tr><td>멀티모달</td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+              <tr><td>지시 따르기</td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+              <tr><td>응답 속도</td><td><span class="star">⭐⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>5.2 상황별 모델 선택 가이드</h3>
+
+        <pre data-lang="text"><code>새 기능 코드 작성       → Claude (정확한 구현, 지시 준수)
+대용량 코드베이스 분석  → Gemini (긴 컨텍스트 처리)
+최신 라이브러리 검색    → ChatGPT 또는 Gemini (웹 검색)
+코드 리뷰 & 리팩토링   → Claude (품질 중심 피드백)
+아키텍처 설계 논의      → Claude 또는 ChatGPT (깊은 추론)
+이미지/다이어그램 분석  → Gemini 또는 ChatGPT (멀티모달)
+빠른 스니펫 생성        → Gemini (응답 속도 빠름)</code></pre>
+
+        <h3>5.3 비용 최적화 전략</h3>
+
+        <pre data-lang="text"><code>간단한 작업 (코드 포맷, 간단한 질문)
+  → 빠르고 저렴한 모델 (Gemini Flash, GPT-4o mini)
+
+중간 복잡도 (버그 수정, 리팩토링)
+  → 중간 모델 (Claude Sonnet, GPT-4o)
+
+복잡한 작업 (아키텍처 설계, 복잡한 알고리즘)
+  → 최고 성능 모델 (Claude Opus, o1)</code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          같은 질문을 두 모델에게 동시에 물어보는 "모델 경쟁" 전략이 효과적이다. 특히 중요한 아키텍처 결정이나 복잡한 버그 해결 시, Claude와 ChatGPT 양쪽의 답변을 비교하면 더 나은 해결책을 찾을 수 있다.
+        </div>
+      </section>
+
+      <!-- ── Section 6 ── -->
+      <section class="section" id="s6">
+        <div class="section-header">
+          <div class="section-num">6</div>
+          <div class="section-title-wrap">
+            <h2>AI 프롬프트 엔지니어링 for 코딩</h2>
+            <div class="section-desc">5가지 패턴 · Before/After 비교 · 템플릿 모음</div>
+          </div>
+        </div>
+
+        <p>AI에게 코딩 작업을 맡길 때 프롬프트의 품질이 결과물의 품질을 결정한다. 막연하게 물어보면 막연한 답이 오고, 구체적으로 물어보면 바로 쓸 수 있는 코드가 온다.</p>
+
+        <h3>6.1 코딩 전용 프롬프트 패턴</h3>
+
+        <p><span class="label">패턴 1</span> <strong>버그 수정</strong></p>
+        <pre data-lang="text"><code>[파일]: src/auth/login.ts
+[함수]: validateToken()
+[에러]: TokenExpiredError: jwt expired
+[스택 트레이스]: (붙여넣기)
+[예상 동작]: 만료된 토큰은 401 반환
+[실제 동작]: 500 에러 발생
+수정해줘.</code></pre>
+
+        <p><span class="label">패턴 2</span> <strong>리팩토링</strong></p>
+        <pre data-lang="text"><code>아래 코드를 리팩토링해줘.
+[목표]: 가독성 향상, 중복 제거
+[제약]: 외부 API 변경 없음, TypeScript strict 모드
+[코드]: (붙여넣기)</code></pre>
+
+        <p><span class="label">패턴 3</span> <strong>테스트 생성</strong></p>
+        <pre data-lang="text"><code>아래 함수의 단위 테스트를 작성해줘.
+[프레임워크]: Vitest
+[커버리지]: 정상 케이스, 엣지 케이스, 에러 케이스
+[함수]: (붙여넣기)</code></pre>
+
+        <p><span class="label">패턴 4</span> <strong>새 기능 구현</strong></p>
+        <pre data-lang="text"><code>[기능]: 사용자 프로필 이미지 업로드
+[기술 스택]: TypeScript, Express, AWS S3
+[요구사항]:
+- 최대 5MB, JPG/PNG만 허용
+- S3에 업로드 후 URL 반환
+[기존 코드 패턴]: (참고할 파일 경로)
+구현해줘.</code></pre>
+
+        <h3>6.2 Before/After 비교</h3>
+
+        <pre data-lang="text"><code><span class="cm"># Before (모호한)</span>
+"로그인이 안 돼요"
+
+<span class="cm"># After (구체적)</span>
+"src/auth/login.ts의 validateToken 함수에서
+만료된 JWT 토큰 처리 시 TokenExpiredError가
+catch되지 않아 500 에러가 발생합니다.
+에러를 catch해서 401 응답을 반환하도록 수정해주세요."</code></pre>
+
+        <h3>6.3 프롬프트 품질 원칙</h3>
+        <ul>
+          <li><strong>역할 부여</strong> — "시니어 TypeScript 개발자로서..." — AI가 더 전문적인 관점으로 답변</li>
+          <li><strong>출력 형식 지정</strong> — "코드 블록으로 답해줘", "표 형식으로 비교해줘"</li>
+          <li><strong>제약 조건 명시</strong> — "외부 라이브러리 추가 없이", "기존 API 변경 없이"</li>
+          <li><strong>예시 제공</strong> — "이런 스타일로 작성해줘: [예시 코드]"</li>
+        </ul>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          프롬프트에 "단계별로 생각해줘 (think step by step)"를 추가하면 복잡한 문제에서 AI의 추론 품질이 크게 향상된다. Raycast 스니펫에 자주 쓰는 프롬프트 템플릿을 저장해두면 매번 타이핑하지 않아도 된다.
+        </div>
+      </section>
+
+      <!-- ── Section 7 ── -->
+      <section class="section" id="s7">
+        <div class="section-header">
+          <div class="section-num">7</div>
+          <div class="section-title-wrap">
+            <h2>Mac 키보드 &amp; 생산성 해킹</h2>
+            <div class="section-desc">Rectangle · Raycast · 단축키 20개 · Mission Control</div>
+          </div>
+        </div>
+
+        <p>Mac의 진짜 생산성은 키보드에서 나온다. 마우스를 최대한 덜 쓰고 키보드로 모든 것을 처리하는 습관을 들이면 코딩 속도가 눈에 띄게 빨라진다.</p>
+
+        <h3>7.1 윈도우 관리 &amp; 런처</h3>
+
+        <p><strong>Rectangle</strong> — 무료 윈도우 관리 도구</p>
+        <pre data-lang="bash"><code>brew install --cask rectangle</code></pre>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>단축키</th><th>기능</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>⌃⌥←</kbd></td><td>왼쪽 절반</td></tr>
+              <tr><td><kbd>⌃⌥→</kbd></td><td>오른쪽 절반</td></tr>
+              <tr><td><kbd>⌃⌥↩</kbd></td><td>전체 화면</td></tr>
+              <tr><td><kbd>⌃⌥C</kbd></td><td>화면 중앙</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Raycast</strong> — Alfred를 대체하는 강력한 런처</p>
+        <pre data-lang="bash"><code>brew install --cask raycast</code></pre>
+        <ul>
+          <li><kbd>⌥Space</kbd>로 실행, 앱/파일/웹 검색</li>
+          <li>클립보드 히스토리 (<kbd>⌘⇧V</kbd>)</li>
+          <li>스니펫 관리, 계산기, 단위 변환</li>
+          <li>AI 통합 (Claude, ChatGPT 연동 가능)</li>
+        </ul>
+
+        <h3>7.2 코딩 필수 단축키</h3>
+        <p>macOS 전역 단축키 중 코딩에 유용한 핵심 20개. 이것만 외워도 마우스 사용이 크게 줄어든다:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>단축키</th><th>기능</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>⌘Space</kbd></td><td>Spotlight / Raycast 실행</td></tr>
+              <tr><td><kbd>⌘Tab</kbd></td><td>앱 전환</td></tr>
+              <tr><td><kbd>⌘`</kbd></td><td>같은 앱 내 창 전환</td></tr>
+              <tr><td><kbd>⌘W</kbd></td><td>탭/창 닫기</td></tr>
+              <tr><td><kbd>⌘←</kbd></td><td>줄 처음으로 이동</td></tr>
+              <tr><td><kbd>⌘→</kbd></td><td>줄 끝으로 이동</td></tr>
+              <tr><td><kbd>⌥←</kbd></td><td>단어 단위 왼쪽 이동</td></tr>
+              <tr><td><kbd>⌥→</kbd></td><td>단어 단위 오른쪽 이동</td></tr>
+              <tr><td><kbd>⌘⇧3</kbd></td><td>전체 화면 캡처</td></tr>
+              <tr><td><kbd>⌘⇧4</kbd></td><td>영역 선택 캡처</td></tr>
+              <tr><td><kbd>⌘⇧5</kbd></td><td>캡처 옵션 메뉴</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7.3 한영 전환 &amp; Mission Control</h3>
+        <p>기본 <kbd>⌃Space</kbd>는 다른 단축키와 충돌이 잦다. <strong>Caps Lock을 한영 전환으로 설정</strong>하는 것이 훨씬 편하다:</p>
+        <p>시스템 설정 → 키보드 → 입력 소스 → "Caps Lock 키로 ABC 전환" 활성화</p>
+
+        <pre data-lang="text"><code>⌃↑       Mission Control (모든 창 보기)
+⌃↓       현재 앱의 모든 창
+⌃→ / ⌃← Spaces(가상 데스크탑) 전환</code></pre>
+
+        <p>Spaces 활용 전략 — 작업 유형별로 가상 데스크탑을 분리하면 집중력이 높아진다:</p>
+        <ul>
+          <li>Space 1: 코딩 (VS Code, 터미널)</li>
+          <li>Space 2: 브라우저 (문서, 레퍼런스)</li>
+          <li>Space 3: 커뮤니케이션 (Slack, 이메일)</li>
+        </ul>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          시스템 설정 → 손쉬운 사용 → 키보드에서 "키보드 단축키"를 열면 모든 시스템 단축키를 확인하고 커스터마이즈할 수 있다. 자주 쓰는 앱에 <kbd>⌃⌥⌘</kbd> 조합으로 전용 단축키를 지정해두면 앱 전환이 훨씬 빨라진다.
+        </div>
+      </section>
+
+      <!-- ── Section 8 ── -->
+      <section class="section" id="s8">
+        <div class="section-header">
+          <div class="section-num">8</div>
+          <div class="section-title-wrap">
+            <h2>Git 워크플로우 + AI 연동</h2>
+            <div class="section-desc">커밋 메시지 · 코드 리뷰 · 머지 충돌 · Git Hooks</div>
+          </div>
+        </div>
+
+        <p>Git 작업에 AI를 연동하면 커밋 메시지 작성, 코드 리뷰, 충돌 해결 등 반복적이고 시간이 걸리는 작업을 크게 줄일 수 있다.</p>
+
+        <h3>8.1 AI 기반 커밋 메시지 작성</h3>
+
+        <pre data-lang="bash"><code><span class="cm"># 변경 사항을 AI에게 전달</span>
+git diff --staged | pbcopy
+<span class="cm"># 클립보드 내용을 AI에게 붙여넣고 커밋 메시지 요청</span></code></pre>
+
+        <pre data-lang="text"><code>아래 git diff를 보고 Conventional Commits 형식의
+커밋 메시지를 작성해줘.
+형식: &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;
+type: feat, fix, docs, style, refactor, test, chore
+[diff 붙여넣기]</code></pre>
+
+        <h3>8.2 AI 코드 리뷰 워크플로우</h3>
+
+        <pre data-lang="bash"><code><span class="cm"># 브랜치 diff를 AI에게 전달</span>
+git diff main...feature/my-feature | pbcopy</code></pre>
+
+        <pre data-lang="text"><code>아래 코드 변경사항을 리뷰해줘.
+체크 항목:
+1. 버그 또는 로직 오류
+2. 보안 취약점
+3. 성능 문제
+4. 코드 스타일 일관성
+5. 테스트 커버리지 누락
+[diff 붙여넣기]</code></pre>
+
+        <h3>8.3 머지 충돌 해결 &amp; Git Hooks</h3>
+
+        <p><strong>Git Hooks + AI 자동화:</strong></p>
+
+        <pre data-lang="bash"><code><span class="cm"># .git/hooks/prepare-commit-msg</span>
+<span class="kw">#!/bin/bash</span>
+<span class="nm">STAGED</span>=$(git diff --cached --stat)
+<span class="kw">if</span> [ -n <span class="st">"$STAGED"</span> ]; <span class="kw">then</span>
+  <span class="kw">echo</span> <span class="st">"# Staged changes:"</span> >> <span class="st">"$1"</span>
+  <span class="kw">echo</span> <span class="st">"# $STAGED"</span> >> <span class="st">"$1"</span>
+<span class="kw">fi</span></code></pre>
+
+        <p><strong>유용한 Git alias:</strong></p>
+
+        <pre data-lang="bash"><code><span class="cm"># ~/.gitconfig</span>
+[alias]
+  lg     = log --oneline --graph --decorate --all
+  st     = status -sb
+  undo   = reset HEAD~1 --mixed
+  save   = stash push -m
+  recent = branch --sort=-committerdate</code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          <code>git log --oneline -20 | pbcopy</code>로 최근 커밋 히스토리를 복사해 AI에게 "이 프로젝트의 커밋 메시지 스타일을 분석해줘"라고 요청하면, 프로젝트 컨벤션에 맞는 커밋 메시지를 생성해준다. <code>git bisect</code>와 AI를 조합하면 버그가 도입된 커밋을 빠르게 찾을 수도 있다.
+        </div>
+      </section>
+
+      <!-- ── Section 9 ── -->
+      <section class="section" id="s9">
+        <div class="section-header">
+          <div class="section-num">9</div>
+          <div class="section-title-wrap">
+            <h2>디버깅 &amp; 문제 해결에 AI 활용</h2>
+            <div class="section-desc">에러 분석 · 러버덕 디버깅 · VS Code 디버거 · 성능 최적화</div>
+          </div>
+        </div>
+
+        <p>버그를 혼자 몇 시간 씨름하는 것보다 AI에게 먼저 물어보는 것이 훨씬 효율적이다. 에러 메시지, 스택 트레이스, 로그를 AI에게 그대로 붙여넣으면 대부분 빠르게 원인을 찾을 수 있다.</p>
+
+        <h3>9.1 에러 메시지 → AI 워크플로우</h3>
+
+        <pre data-lang="text"><code>[에러 메시지]:
+TypeError: Cannot read properties of undefined (reading 'map')
+
+[스택 트레이스]:
+at UserList (src/components/UserList.tsx:15:23)
+
+[관련 코드]:
+const UserList = ({ users }) =&gt; {
+  return users.map(user =&gt; &lt;div&gt;{user.name}&lt;/div&gt;)
+}
+
+[발생 상황]: 페이지 첫 로드 시
+[시도한 것]: users가 undefined인지 확인했으나 원인 불명
+
+원인과 해결 방법을 알려줘.</code></pre>
+
+        <pre data-lang="bash"><code><span class="cm"># 명령어 실행 + 에러를 클립보드로</span>
+npm run build 2>&amp;1 | pbcopy</code></pre>
+
+        <h3>9.2 로그 분석 &amp; 러버덕 디버깅</h3>
+
+        <pre data-lang="text"><code>지금 디버깅 중인 문제를 설명할게.
+내가 이해한 것과 이해 못 한 것을 정리해줘.
+
+[문제 상황 설명]
+[시도한 것들]
+[현재 가설]
+
+내 접근 방식에서 놓친 게 있을까?</code></pre>
+
+        <h3>9.3 VS Code 디버거 활용</h3>
+
+        <pre data-lang="json"><code><span class="cm">// .vscode/launch.json</span>
+{
+  <span class="ky">"version"</span>: <span class="st">"0.2.0"</span>,
+  <span class="ky">"configurations"</span>: [{
+    <span class="ky">"type"</span>: <span class="st">"node"</span>,
+    <span class="ky">"request"</span>: <span class="st">"launch"</span>,
+    <span class="ky">"name"</span>: <span class="st">"Debug TypeScript"</span>,
+    <span class="ky">"program"</span>: <span class="st">"${workspaceFolder}/src/index.ts"</span>,
+    <span class="ky">"runtimeArgs"</span>: [<span class="st">"-r"</span>, <span class="st">"ts-node/register"</span>],
+    <span class="ky">"sourceMaps"</span>: <span class="kw">true</span>,
+    <span class="ky">"envFile"</span>: <span class="st">"${workspaceFolder}/.env"</span>
+  }]
+}</code></pre>
+
+        <p><strong>AI 디버깅 세션 패턴:</strong></p>
+        <ol class="steps">
+          <li>에러 발생 → 에러 메시지 + 스택 트레이스 복사</li>
+          <li>AI에게 "원인이 뭘까?" 질문</li>
+          <li>AI 제안 → 코드 수정 시도</li>
+          <li>여전히 실패 → "이 방법은 안 됐어. 다른 접근은?" 이어서 질문</li>
+          <li>해결 → "이 버그의 근본 원인과 예방 방법을 설명해줘"</li>
+        </ol>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          디버깅할 때 AI에게 "이 코드에서 버그를 찾아줘"보다 "이 코드가 X 상황에서 Y 결과를 내야 하는데 Z 결과가 나와. 왜 그럴까?"처럼 구체적인 기대값과 실제값을 함께 제공하면 훨씬 정확한 진단을 받을 수 있다.
+        </div>
+      </section>
+
+      <!-- ── Section 10 ── -->
+      <section class="section" id="s10">
+        <div class="section-header">
+          <div class="section-num">10</div>
+          <div class="section-title-wrap">
+            <h2>Mac 개발 환경 유지보수</h2>
+            <div class="section-desc">Homebrew 루틴 · dotfiles · 디스크 정리 · macOS 업데이트 대응</div>
+          </div>
+        </div>
+
+        <p>개발 환경도 주기적으로 관리해야 한다. 방치하면 패키지가 낡아지고, 디스크가 차고, macOS 업데이트 후 환경이 깨지는 상황이 생긴다.</p>
+
+        <h3>10.1 Homebrew 업데이트 루틴</h3>
+        <p>주 1회 정도 실행하는 것을 권장한다:</p>
+
+        <pre data-lang="bash"><code><span class="cm"># 한 번에 업데이트 + 업그레이드 + 정리</span>
+brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup
+
+<span class="cm"># 문제 진단</span>
+brew doctor
+
+<span class="cm"># alias로 등록</span>
+<span class="kw">alias</span> <span class="nm">brewup</span>=<span class="st">"brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup &amp;&amp; brew doctor"</span></code></pre>
+
+        <h3>10.2 VS Code &amp; dotfiles 동기화</h3>
+        <p><kbd>⌘⇧P</kbd> → "Settings Sync: Turn On" → GitHub 계정으로 로그인하면 설정, 확장, 단축키가 자동 동기화된다.</p>
+
+        <pre data-lang="bash"><code><span class="cm"># dotfiles 저장소 초기화</span>
+mkdir ~/dotfiles &amp;&amp; cd ~/dotfiles
+git init
+
+<span class="cm"># 심볼릭 링크로 연결</span>
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.gitconfig ~/.gitconfig</code></pre>
+
+        <pre data-lang="bash"><code><span class="cm"># .gitconfig 예시</span>
+[user]
+  name  = Your Name
+  email = you@example.com
+[core]
+  editor = code --wait
+[alias]
+  lg = log --oneline --graph --decorate</code></pre>
+
+        <h3>10.3 디스크 정리 &amp; macOS 업데이트 대응</h3>
+
+        <pre data-lang="bash"><code><span class="cm"># node_modules 일괄 삭제</span>
+find ~/projects -name <span class="st">"node_modules"</span> -type d -prune -exec rm -rf <span class="st">'{}'</span> +
+
+<span class="cm"># 캐시 정리</span>
+bun pm cache rm
+brew cleanup --prune=all</code></pre>
+
+        <p><strong>macOS 업데이트 후 체크리스트:</strong></p>
+
+        <pre data-lang="bash"><code>brew doctor                  <span class="cm"># Homebrew 재설정 확인</span>
+node --version               <span class="cm"># Node.js 버전 확인</span>
+git --version                <span class="cm"># Git 설정 확인</span>
+xcode-select --install       <span class="cm"># 필요시 재설치</span></code></pre>
+
+        <div class="tip">
+          <div class="tip-label">💡 팁</div>
+          <code>brew bundle dump</code>로 현재 환경을 <code>Brewfile</code>로 저장하고, <code>brew bundle install</code>로 새 Mac에서 한 번에 복원하자. dotfiles 저장소에 Brewfile도 함께 관리하면 완벽한 환경 이식이 가능하다.
+        </div>
+      </section>
+
+      <!-- ── Outro ── -->
+      <section class="section" id="outro">
+        <div style="background:linear-gradient(135deg,rgba(88,166,255,0.08),rgba(188,140,255,0.05));border:1px solid rgba(88,166,255,0.2);border-radius:12px;padding:32px 36px;">
+          <h2 style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px;">마치며</h2>
+          <p style="color:var(--text2);line-height:1.8;margin-bottom:12px;">
+            10가지 팁을 모두 적용하면 MacBook이 단순한 컴퓨터가 아닌 AI 파워드 개발 스테이션으로 변한다. 처음부터 모든 것을 한 번에 설정하려 하지 말고, <a href="#s1" style="color:var(--accent);text-decoration:none;">Mac 개발 환경 기초 세팅</a>부터 시작해 하나씩 익혀가는 것을 권장한다.
+          </p>
+          <p style="color:var(--text2);line-height:1.8;margin-bottom:12px;">
+            특히 <a href="#s3" style="color:var(--accent);text-decoration:none;">Open Code</a>와 <a href="#s4" style="color:var(--accent);text-decoration:none;">Open Spec</a>의 조합은 AI 코딩 워크플로우의 핵심이다. <a href="#s5" style="color:var(--accent);text-decoration:none;">AI 모델 전략적 선택법</a>을 참고해 상황에 맞는 모델을 선택하고, <a href="#s6" style="color:var(--accent);text-decoration:none;">프롬프트 엔지니어링</a> 패턴을 활용하면 AI의 잠재력을 최대한 끌어낼 수 있다.
+          </p>
+          <p style="color:var(--text3);font-size:13px;margin:0;">
+            AI 도구는 빠르게 발전하고 있다. 중요한 것은 특정 도구에 집착하지 않고, 항상 더 효율적인 방법을 탐색하는 자세다. 이 가이드가 그 탐색의 좋은 출발점이 되길 바란다.
+          </p>
+        </div>
+      </section>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /layout -->
+
+<script>
+  // ── Sidebar active state on scroll ──
+  const sections = document.querySelectorAll('section[id], div[id="intro"]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ── Mobile sidebar toggle ──
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // Close sidebar on nav click (mobile)
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
