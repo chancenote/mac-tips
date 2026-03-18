@@ -1,0 +1,101 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <!-- Title gradient -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#79c0ff"/>
+      <stop offset="50%" style="stop-color:#bc8cff"/>
+      <stop offset="100%" style="stop-color:#79c0ff"/>
+    </linearGradient>
+    <!-- Glow top-right -->
+    <radialGradient id="glow1" cx="75%" cy="15%" r="45%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#58a6ff;stop-opacity:0"/>
+    </radialGradient>
+    <!-- Glow bottom-left -->
+    <radialGradient id="glow2" cx="20%" cy="85%" r="40%">
+      <stop offset="0%" style="stop-color:#bc8cff;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#bc8cff;stop-opacity:0"/>
+    </radialGradient>
+    <!-- Card border gradient -->
+    <linearGradient id="cardBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#bc8cff;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#30363d" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+  </g>
+
+  <!-- Top border glow line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#titleGrad)" opacity="0.8"/>
+
+  <!-- Main card area -->
+  <rect x="60" y="60" width="1080" height="510" rx="16" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Badge -->
+  <rect x="100" y="100" width="190" height="32" rx="16" fill="rgba(88,166,255,0.1)" stroke="rgba(88,166,255,0.35)" stroke-width="1"/>
+  <circle cx="122" cy="116" r="5" fill="#3fb950"/>
+  <text x="135" y="121" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#58a6ff" letter-spacing="0.5">2026년 3월 최신판</text>
+
+  <!-- Main title line 1 -->
+  <text x="100" y="195" font-family="system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" font-size="64" font-weight="800" fill="#e6edf3" letter-spacing="-2">MacBook으로 코딩을</text>
+
+  <!-- Main title line 2 - gradient -->
+  <text x="100" y="275" font-family="system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" font-size="64" font-weight="800" fill="url(#titleGrad)" letter-spacing="-2">10배 잘하는 방법</text>
+
+  <!-- Subtitle -->
+  <text x="100" y="335" font-family="system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" font-size="22" fill="#8b949e">개발 환경 세팅부터 AI 모델 선택, 키보드 단축키까지 — Apple Silicon 기준 실전 가이드</text>
+
+  <!-- Divider -->
+  <line x1="100" y1="375" x2="1100" y2="375" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Stat chips -->
+  <!-- Chip 1 -->
+  <rect x="100" y="400" width="155" height="36" rx="8" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="120" y="423" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b949e">📖  5,000단어 가이드</text>
+
+  <!-- Chip 2 -->
+  <rect x="270" y="400" width="130" height="36" rx="8" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="290" y="423" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b949e">📚  10개 챕터</text>
+
+  <!-- Chip 3 -->
+  <rect x="415" y="400" width="140" height="36" rx="8" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="435" y="423" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b949e">⌨️  50+ 단축키</text>
+
+  <!-- Chip 4 -->
+  <rect x="570" y="400" width="165" height="36" rx="8" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="590" y="423" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b949e">🍎  M시리즈 칩 기준</text>
+
+  <!-- Right side decorative code block -->
+  <rect x="820" y="395" width="310" height="120" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <!-- Terminal dots -->
+  <circle cx="843" cy="414" r="5" fill="#ff5f57"/>
+  <circle cx="861" cy="414" r="5" fill="#ffbd2e"/>
+  <circle cx="879" cy="414" r="5" fill="#28ca41"/>
+  <line x1="820" y1="427" x2="1130" y2="427" stroke="#30363d" stroke-width="0.8"/>
+  <!-- Code text -->
+  <text x="840" y="451" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#8b949e">$</text>
+  <text x="857" y="451" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#3fb950"> brew install mise</text>
+  <text x="840" y="473" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#8b949e">$</text>
+  <text x="857" y="473" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#79c0ff"> mise use node@22</text>
+  <text x="840" y="495" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#8b949e">#</text>
+  <text x="857" y="495" font-family="'JetBrains Mono', 'Fira Code', Menlo, monospace" font-size="13" fill="#6e7681"> AI + Mac 생산성 가이드</text>
+
+  <!-- Bottom border -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#titleGrad)" opacity="0.5"/>
+</svg>
